@@ -7,10 +7,6 @@
 
 #ifdef __SIZEOF_INT128__
 using bigint = __int128_t;
-#elif
-using bigint = unsigned long long;
-#endif
-
 // 128ビット整数の出力用ヘルパー（10進数表示）
 std::ostream& operator<<(std::ostream& os, bigint n)
 {
@@ -25,6 +21,10 @@ std::ostream& operator<<(std::ostream& os, bigint n)
     std::reverse(s.begin(), s.end());
     return os << s;
 }
+#else
+using bigint = unsigned long long;
+#endif
+
 
 // 数値を指定された基数(base <= 36)の文字列表現に変換する関数
 std::string to_base_string(bigint value, long long base)
